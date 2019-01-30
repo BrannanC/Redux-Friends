@@ -8,10 +8,15 @@ export const getFriends = () => dispatch => {
         .catch(err => dispatch({ type: 'FETCHING_FRIENDS_FAILURE', payload: err}))
 }
 
-export const addFriend = friend => ({
-    type: 'ADD_FRIEND',
-    payload: friend
-})
+export const addFriend = friend => dispatch => {
+    axios 
+        .post('http://localhost:5000/api/friends', friend)
+        .then(res => dispatch({
+            type: 'ADD_FRIEND',
+            payload: res.data
+        }))
+        .catch(err => console.log(err))
+}
 
 export const toggleForm = () => ({
     type: 'TOGGLE_FORM'

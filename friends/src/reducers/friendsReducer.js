@@ -39,7 +39,7 @@ const initialState = {
         case 'ADD_FRIEND':
             return {
                 ...state,
-                friends: [...state.friends, action.payload],
+                friends: action.payload,
                 displayForm: false
             }
         case 'TOGGLE_FORM':

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+
+import FriendsList from './components/FriendsList'
 import './App.css';
 
 class App extends Component {
@@ -8,7 +10,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
 
-            Learn React
+            <FriendsList />
 
         </header>
       </div>

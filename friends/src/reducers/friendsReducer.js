@@ -9,6 +9,7 @@ const initialState = {
     deletingFriend: false,
     friendDeleted: false,
     friends: [],
+    displayForm: false,
     error: null
   }
 
@@ -38,7 +39,13 @@ const initialState = {
         case 'ADD_FRIEND':
             return {
                 ...state,
-                friends: [...state.friends, action.payload]
+                friends: [...state.friends, action.payload],
+                displayForm: false
+            }
+        case 'TOGGLE_FORM':
+            return {
+                ...state,
+                displayForm: !state.displayForm
             }
         default:
             return state;

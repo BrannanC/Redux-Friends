@@ -12,3 +12,7 @@ export const addFriend = friend => ({
     type: 'ADD_FRIEND',
     payload: friend
 })
+
+export const toggleForm = () => ({
+    type: 'TOGGLE_FORM'
+})

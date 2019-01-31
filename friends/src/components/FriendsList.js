@@ -72,8 +72,12 @@ class FriendsList extends React.Component {
                                                                 toUpdate={this.state.toUpdate}
                                                                 updateFriend={this.updateFriend}
                                                                 toggleUpdate={this.toggleUpdate}
-                                                            />)}                
-                {this.props.displayForm ? <div><button onClick={this.toggleForm}>[X]</button><CreateFriendForm /></div> : <button onClick={this.toggleForm}>Add New Friend</button>}
+                                                            />)}
+            <div className="create-friend">
+            {this.props.displayForm ? <div><button onClick={this.toggleForm}>[X]</button><CreateFriendForm /></div> 
+                : <button onClick={this.toggleForm}>Add New Friend</button>}
+            </div>                
+                
             </div>
         );
     }

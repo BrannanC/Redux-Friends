@@ -41,12 +41,18 @@ const initialState = {
                 ...state,
                 friends: action.payload,
                 displayForm: false
-            }
+        }
+        case 'DELETE_FRIEND':
+            return {
+                ...state,
+                friends: action.payload,
+                displayForm: false
+        }
         case 'TOGGLE_FORM':
             return {
                 ...state,
                 displayForm: !state.displayForm
-            }
+        }
         default:
             return state;
       }

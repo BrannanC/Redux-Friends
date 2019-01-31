@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getFriends, toggleForm } from '../actions';
+import { getFriends, toggleForm, deleteFriend } from '../actions';
 
 import Friend from './Friend';
 import CreateFriendForm from './CreateFriendForm';
@@ -15,12 +15,17 @@ class FriendsList extends React.Component {
         this.props.toggleForm();
     }
 
+    deleteFriend = (e, id) => {
+        e.preventDefault();
+        this.props.deleteFriend(id);
+    }
+
     render(){
         return (
             <div className="FriendsList">
                 {this.props.fetchingFriends && <p>getting friends list</p>}
                 {this.props.error && <p>{this.props.error.message}</p>}
-                {this.props.friends && this.props.friends.map(friend => <Friend friend={friend} key={friend.name + friend.id} />)}                
+                {this.props.friends && this.props.friends.map(friend => <Friend deleteFriend={this.deleteFriend} friend={friend} key={friend.name + friend.id} />)}                
                 {this.props.displayForm ? <div><button onClick={this.toggleForm}>[X]</button><CreateFriendForm /></div> : <button onClick={this.toggleForm}>Add New Friend</button>}
             </div>
         );
@@ -41,4 +46,4 @@ const mapStateToProps = state => ({
     error: state.friendsReducer.error
 })
 
-export default connect(mapStateToProps, { getFriends, toggleForm })(FriendsList);
+export default connect(mapStateToProps, { getFriends, toggleForm, deleteFriend })(FriendsList);

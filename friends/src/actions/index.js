@@ -9,10 +9,21 @@ export const getFriends = () => dispatch => {
 }
 
 export const addFriend = friend => dispatch => {
+    const newFriend = {...friend, id: Date.now()};
     axios 
-        .post('http://localhost:5000/api/friends', friend)
+        .post('http://localhost:5000/api/friends', newFriend)
         .then(res => dispatch({
             type: 'ADD_FRIEND',
+            payload: res.data
+        }))
+        .catch(err => console.log(err))
+}
+
+export const deleteFriend = id => dispatch => {
+    axios 
+        .delete(`http://localhost:5000/api/friends/${id}`)
+        .then(res => dispatch({
+            type: 'DELETE_FRIEND',
             payload: res.data
         }))
         .catch(err => console.log(err))

@@ -29,6 +29,16 @@ export const deleteFriend = id => dispatch => {
         .catch(err => console.log(err))
 }
 
+export const updateFriend = friend => dispatch => {
+    axios
+        .put(`http://localhost:5000/api/friends/${friend.id}`, friend)
+        .then(res => dispatch({
+            type: 'UPDATE_FRIEND',
+            payload: res.data
+        }))
+        .catch(err => console.log(err))
+}
+
 export const toggleForm = () => ({
     type: 'TOGGLE_FORM'
 })

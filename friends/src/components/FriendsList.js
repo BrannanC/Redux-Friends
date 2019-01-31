@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getFriends, toggleForm, deleteFriend } from '../actions';
+import { getFriends, toggleForm, deleteFriend, updateFriend } from '../actions';
 
 import Friend from './Friend';
 import CreateFriendForm from './CreateFriendForm';
 
 class FriendsList extends React.Component {
+    state = {
+        toUpdate: {
+            name: '',
+            age: '',
+            email: '',
+            id: ''
+        }
+    }
 
     componentDidMount(){
         this.props.getFriends();
@@ -20,12 +28,51 @@ class FriendsList extends React.Component {
         this.props.deleteFriend(id);
     }
 
+    updateFriend = (e, friend) => {
+        e.preventDefault();
+        this.props.updateFriend(friend);
+        this.setState({
+            toUpdate: {
+                name: '',
+                age: '',
+                email: '',
+                id: ''
+            }
+        })
+    }
+
+    handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState(prevState => ({
+            toUpdate: {
+                ...prevState.toUpdate,
+                [name]: value
+            }
+        }))
+    }
+
+    toggleUpdate = (e, id) => {
+        e.preventDefault();
+        this.setState(prevState => ({
+            toUpdate: {...prevState.toUpdate, id: prevState.toUpdate.id === id ? '' : id}
+        }))
+    }
+
     render(){
         return (
             <div className="FriendsList">
                 {this.props.fetchingFriends && <p>getting friends list</p>}
                 {this.props.error && <p>{this.props.error.message}</p>}
-                {this.props.friends && this.props.friends.map(friend => <Friend deleteFriend={this.deleteFriend} friend={friend} key={friend.name + friend.id} />)}                
+                {this.props.friends && this.props.friends.map(friend => <Friend 
+                                                                deleteFriend={this.deleteFriend} 
+                                                                friend={friend} 
+                                                                key={friend.name + friend.id} 
+                                                                handleChange={this.handleChange}
+                                                                toUpdate={this.state.toUpdate}
+                                                                updateFriend={this.updateFriend}
+                                                                toggleUpdate={this.toggleUpdate}
+                                                            />)}                
                 {this.props.displayForm ? <div><button onClick={this.toggleForm}>[X]</button><CreateFriendForm /></div> : <button onClick={this.toggleForm}>Add New Friend</button>}
             </div>
         );
@@ -46,4 +93,4 @@ const mapStateToProps = state => ({
     error: state.friendsReducer.error
 })
 
-export default connect(mapStateToProps, { getFriends, toggleForm, deleteFriend })(FriendsList);
+export default connect(mapStateToProps, { getFriends, toggleForm, deleteFriend, updateFriend })(FriendsList);

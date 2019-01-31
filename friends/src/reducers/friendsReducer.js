@@ -4,7 +4,7 @@ const initialState = {
     friendsFetched: false,
     friendsSaved: false,
     savingFriends: false,
-    updatingFriend: false,
+    updatingFriend: '',
     friendUpdated: false,
     deletingFriend: false,
     friendDeleted: false,
@@ -48,6 +48,11 @@ const initialState = {
                 friends: action.payload,
                 displayForm: false
         }
+        case 'UPDATE_FRIEND':
+        return {
+            ...state,
+            friends: action.payload,
+    }
         case 'TOGGLE_FORM':
             return {
                 ...state,

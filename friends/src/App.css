@@ -78,3 +78,18 @@
 .App .FriendsList .create-friend button {
   width: 90%;
 }
+
+@media (max-width: 600px) {
+  .App .FriendsList {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .App .FriendsList .Friend {
+    width: 80%;
+  }
+
+  .App .FriendsList .create-friend {
+    width: 80%;
+  }
+}

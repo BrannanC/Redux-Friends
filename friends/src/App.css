@@ -28,6 +28,12 @@
   border-radius: 5px;
   box-shadow: 1px 1px 2px #61dafb;
   position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.App .FriendsList .Friend::-webkit-scrollbar { 
+  display: none;
 }
 
 .App .FriendsList .Friend h1 {
